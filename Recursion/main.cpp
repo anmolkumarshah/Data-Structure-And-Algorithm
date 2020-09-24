@@ -40,10 +40,11 @@ double e(int x, int n){
     return e(x,n-1);
 }
 
+// TOWER OF HANOI
 void TOH(int n, int A, int B, int C){
     if(n>0){
         TOH(n-1,A,C,B);
-        printf("Mave %d to %d\t",A,C);
+        printf("Move %d to %d\t",A,C);
         TOH(n-1,B,A,C);
     }
 }
