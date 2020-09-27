@@ -11,6 +11,8 @@ int Max(int arr[],int n){
     return max;
 }
 
+// this can also be used for unsorted array and still gives same
+// time complexity i.e. of O(n)
 void Find_Duplicate_count(int arr[],int n){
     int m = Max(arr,n);
     int *b = (int *)malloc((m+1)*sizeof(int));
