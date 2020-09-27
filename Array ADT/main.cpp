@@ -180,29 +180,133 @@ void Rearrange(struct Array *arr){
     display(arr);
 }
 
+struct Array * Merge(struct Array *arr1, struct Array *arr2){
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+    arr3->length = arr1->length+arr2->length;
+    arr3->size = 20;
+    while(i<arr1->length && j<arr2->length){
+        if(arr1->arr[i]<arr2->arr[j]){
+            arr3->arr[k++] = arr1->arr[i++];
+        }
+        else{
+            arr3->arr[k++] = arr2->arr[j++];
+        }
+    }
+    for(;i<arr1->length;i++){
+        arr3->arr[k++] = arr1->arr[i];
+    }
+    for(;j<arr2->length;j++){
+        arr3->arr[k++] = arr2->arr[j];
+    }
+    return arr3;
+}
+
+struct Array * Union(struct Array *arr1, struct Array *arr2){
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+    arr3->size = 20;
+    while(i<arr1->length && j<arr2->length){
+        if(arr1->arr[i]<arr2->arr[j]){
+            arr3->arr[k++] = arr1->arr[i++];
+
+        }
+        else if(arr2->arr[j]<arr1->arr[i]){
+            arr3->arr[k++] = arr2->arr[j++];
+
+        }
+        else{
+            arr3->arr[k++] = arr2->arr[j++];
+            i++;
+        }
+    }
+    for(;i<arr1->length;i++){
+        arr3->arr[k++] = arr1->arr[i];
+    }
+    for(;j<arr2->length;j++){
+        arr3->arr[k++] = arr2->arr[j];
+    }
+    arr3->length = k;
+    display(arr3);
+    return arr3;
+}
+
+struct Array * Intersaction(struct Array *arr1, struct Array *arr2){
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+    arr3->size = 20;
+    while(i<arr1->length && j<arr2->length){
+        if(arr1->arr[i]<arr2->arr[j]){
+            //arr3->arr[k++] = arr1->arr[i++];
+            i++;
+        }
+        else if(arr2->arr[j]<arr1->arr[i]){
+            //arr3->arr[k++] = arr2->arr[j++];
+            j++;
+        }
+        else{
+            arr3->arr[k++] = arr2->arr[j++];
+            i++;
+        }
+    }
+    /*
+    for(;i<arr1->length;i++){
+        arr3->arr[k++] = arr1->arr[i];
+    }
+    for(;j<arr2->length;j++){
+        arr3->arr[k++] = arr2->arr[j];
+    }
+    */
+    arr3->length = k;
+    display(arr3);
+    return arr3;
+}
+
+struct Array * Difference(struct Array *arr1, struct Array *arr2){
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+    arr3->size = 20;
+    while(i<arr1->length && j<arr2->length){
+        if(arr1->arr[i]<arr2->arr[j]){
+            arr3->arr[k++] = arr1->arr[i++];
+            i++;
+        }
+        else if(arr2->arr[j]<arr1->arr[i]){
+            //arr3->arr[k++] = arr2->arr[j++];
+            j++;
+        }
+        else{
+            //arr3->arr[k++] = arr2->arr[j++];
+            j++;
+            i++;
+        }
+    }
+
+    for(;i<arr1->length;i++){
+        arr3->arr[k++] = arr1->arr[i];
+    }
+    /*
+    for(;j<arr2->length;j++){
+        arr3->arr[k++] = arr2->arr[j];
+    }
+    */
+    arr3->length = k;
+    display(arr3);
+    return arr3;
+}
 
 int main(){
-    struct Array a = {{-8,5,-7,4,-9,3,-1,-22,2,1,-5},20,11};
-    insert(&a,3,300);
-    Swap(&a.arr[0],&a.arr[1]);
-    display(&a);
-    append(&a,100);
-    //display(&a);
-    Delete(&a,2);
-    //display(&a);
-    //printf("\nindex is %d",binary(a.arr,0,a.length-1,300));
-    //printf("\n%d",sum(&a,a.length));
-    //printf("\n%0.2f",avg(&a));
-    //Reverse(&a);
-    //display(&a);
-    //Reverse2(&a);
-    //display(&a);
-    //left_shift(&a);
-    //left_shift(&a);
-    //right_shift(&a);
-    bubble(&a);
-    //Insert_in_sorted(&a,3);
-    //printf("\n%d",check_if_sorted(&a));
-    //Rearrange(&a);
+    struct Array arr1 = {{2,6,8,10,15,25,30,35,40,59},10,9};
+    struct Array arr2 = {{3,6,7,15,20},10,5};
+    struct Array *arr3;
+    Difference(&arr2,&arr1);
+
 return 0;
 }
