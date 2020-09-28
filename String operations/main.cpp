@@ -146,15 +146,23 @@ int Anagram(char *a,char *b){
     return 1;
 }
 
+void perm(char str[],int l, int h){
+    int i;
+    if(l==h){
+        printf("%s\t",str);
+    }else{
+        for(i=l;i<=h;i++){
+            Swap(&str[i],&str[l]);
+            perm(str,l+1,h);
+            Swap(&str[l],&str[i]);
+        }
+    }
+}
+
 
 int main(){
-    char a[] = "decimal";
-    char b[] = "medical";
-    if(Anagram(a,b)){
-        printf("Are Anagram");
-    }else{
-        printf("Are not Anagram");
-    }
+    char a[] = "mango";
+    perm(a,0,2);
 
 return 0;
 }
