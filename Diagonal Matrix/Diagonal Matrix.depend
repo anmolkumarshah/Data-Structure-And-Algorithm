@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1601401737 source:d:\c++\data structures\diagonal matrix\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+

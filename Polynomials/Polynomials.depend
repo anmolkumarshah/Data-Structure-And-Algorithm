@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1601485956 source:d:\c++\data structures\polynomials\main.cpp
+	<stdio.h>
+	<stdlib.h>
+
