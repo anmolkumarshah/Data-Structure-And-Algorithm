@@ -164,9 +164,10 @@ void InsertAfter(struct Node *ptr,int index,int data){
     for(i=0;i<index-1&&ptr;i++){
         ptr = ptr->next;
     }
-    t->next = ptr->next;
-    ptr->next = t;
-
+    if(ptr){
+        t->next = ptr->next;
+        ptr->next = t;
+    }
 }
 
 void Insert(struct Node *ptr,int index,int data){
@@ -193,15 +194,69 @@ void InsertSort(int data){
     q->next = t;
 }
 
+void Delete(int index){
+    if(index == 0){
+        struct Node *ptr =(struct Node *)malloc(sizeof(struct Node));
+        ptr = first;
+        first = first->next;
+        free(ptr);
+    }else{
+        int i;
+        struct Node *ptr =(struct Node *)malloc(sizeof(struct Node));
+        struct Node *q =(struct Node *)malloc(sizeof(struct Node));
+        ptr = first;
+        q = NULL;
+        for(i=0;i<index&&ptr;i++){
+            q = ptr;
+            ptr=ptr->next;
+        }
+        q->next = ptr->next;
+        free(ptr);
+    }
+}
+
+int isSorted(struct Node *ptr){
+    int x = MININT;
+    while(ptr){
+        if(ptr->data < x)
+            return 0;
+        x = ptr->data;
+        ptr=ptr->next;
+    }
+    return 1;
+}
+
+void RemoveDuplicate(){ // from sorted only
+    struct Node *ptr =(struct Node *)malloc(sizeof(struct Node));
+    struct Node *q =(struct Node *)malloc(sizeof(struct Node));
+
+    ptr = first;
+    q = ptr->next;
+
+    while(q){
+        if(ptr->data != q->data){
+            ptr = q;
+            q = q->next;
+        }else{
+            ptr->next = q->next;
+            free(q);
+            q = ptr->next;
+        }
+    }
+}
+
 int main()
 {
-    int arr[] = {1,2,3,4,6,7,8,9,10};
+    int arr[] = {1,2,3,4,6,7,8,8,10};
     Create(arr,9);
     Display(first);
    // printf("\n%d",ImprovedLinear(first,2)->data);
     InsertSort(20);
     InsertSort(18);
     InsertSort(24);
-   Display(first);
+    Display(first);
+    RemoveDuplicate();
+    Display(first);
+    printf("\n%d",isSorted(first));
     return 0;
 }
