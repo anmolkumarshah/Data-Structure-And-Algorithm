@@ -5,7 +5,7 @@
 struct Node{
     int data;
     struct Node *next;
-}*first = NULL;
+}*first = NULL,*second = NULL, *third = NULL;
 
 /*
     creating a pointer of type struct node first -> which is global
@@ -28,6 +28,25 @@ void Create(int *arr,int n){
     first->next = NULL;
 
     last = first;
+    int i;
+
+    for(i=1;i<n;i++){
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = arr[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+
+}
+
+void Create2(int *arr,int n){
+    struct Node *last, *t;
+    second = (struct Node *)malloc(sizeof(struct Node));
+    second->data = arr[0];
+    second->next = NULL;
+
+    last = second;
     int i;
 
     for(i=1;i<n;i++){
@@ -245,18 +264,102 @@ void RemoveDuplicate(){ // from sorted only
     }
 }
 
+//REVERING LLIST USING SLIDING POINTER TECHNIQUE
+void Reverse(){
+    struct Node *p = first;
+    struct Node *q = NULL;
+    struct Node *r = NULL;
+
+    while(p){
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
+//REVERSE LLIST USING RECURSION
+void Reverse2(struct Node *q,struct Node *p){
+    if(p){
+        Reverse2(p,p->next);
+        p->next = q;
+    }else{
+        first = q;
+    }
+}
+
+void Concatenate(struct Node *first,struct Node *second){
+    struct Node *ptr;
+    ptr = first;
+    while(ptr->next!=NULL){
+        ptr=ptr->next;
+    }
+    ptr->next = second;
+}
+
+void Merge(struct Node *first,struct Node *second){
+    struct Node *last;
+    if(first->data < second->data){
+        last = third = first;
+        first = first->next;
+        third->next = NULL;
+    }else{
+        last = third = second;
+        second = second->next;
+        third->next = NULL;
+    }
+    while(first!=NULL && second !=NULL){
+        if(first->data < second->data){
+            last->next = first;
+            last = last->next;
+            first = first->next;
+            last->next = NULL;
+        }else{
+            last->next = second;
+            last = last->next;
+            second = second->next;
+            last->next = NULL;
+        }
+    }
+    if(first!=NULL){
+        last->next = first;
+    }
+    if(second!=NULL){
+        last->next = second;
+    }
+}
+
+int haveLoop(struct Node *ptr){
+    struct Node *p,*q;
+    p = q = ptr;
+    do{
+        p = p->next;
+        q = q->next;
+        q = q!=NULL ? q->next : NULL;
+    }while(p && q && p!=q);
+    return p==q ? 1 : 0;
+
+}
+
+
 int main()
 {
-    int arr[] = {1,2,3,4,6,7,8,8,10};
-    Create(arr,9);
-    Display(first);
-   // printf("\n%d",ImprovedLinear(first,2)->data);
-    InsertSort(20);
-    InsertSort(18);
-    InsertSort(24);
-    Display(first);
-    RemoveDuplicate();
-    Display(first);
-    printf("\n%d",isSorted(first));
+    int arr[] = {1,2,3,4,6,7,8};
+    int brr[] = {10,20,30,40,50,60,70,80};
+    struct Node *t1,*t2;
+        Create(arr,7);
+        Create2(brr,8);
+    //t1=first->next->next;
+    //t2=first->next->next->next->next;
+    //t2->next=t1;
+
+
+    //Display(first);
+    Display(second);
+    //Concatenate(second,first);
+    Display(second);
+    Merge(first,second);
+    printf("\n%d",haveLoop(third));
     return 0;
 }
