@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1603864775 source:d:\c++\data structures\stack ll\main.c
+	<stdio.h>
+	<stdlib.h>
+

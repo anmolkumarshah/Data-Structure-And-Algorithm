@@ -96,6 +96,7 @@ void Reverse(struct Node *ptr){
         ptr->prev = temp;
         ptr=ptr->prev;
         if(ptr && ptr->next == NULL){
+                // BEFORE CHECKING PTR NEXT CHECK IS PTR EXIST
             first = ptr;
         }
     }
