@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1604561971 source:d:\c++\data structures\pairs stl intro\main.cpp
+	<iostream>
+	<algorithm>
+
