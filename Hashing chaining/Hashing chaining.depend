@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1612597555 source:e:\c++\data structures\hashing chaining\main.cpp
+	<iostream>
+	<vector>
+	<forward_list>
+

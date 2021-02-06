@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1605252800 source:d:\c++\data structures\binary heao revisited\main.c
+	<stdio.h>
+	<stdlib.h>
+

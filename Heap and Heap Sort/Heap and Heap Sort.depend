@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1605019126 source:d:\c++\data structures\heap and heap sort\main.c
+	<stdio.h>
+	<stdlib.h>
+
